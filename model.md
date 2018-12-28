@@ -50,7 +50,9 @@ J(x)=\sum_{k=0}^{K}(J_{v,k}(x)+J_{y,k}(x))
 $$
   
 把数据写成向量或矩阵形式，令：  
-$$Z=\left[
+$$
+
+Z=\left[
 \begin{matrix}
     v_1\\\\    
     v_2\\\\    
