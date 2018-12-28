@@ -65,35 +65,34 @@ Z=\left[
 \end{matrix}
 \right],
 
-H=\left[
+H=
 \begin{matrix}
-    1\\  
-    -A_1    &...\\  
-            &A_{K-1}    &1\\  
-            \\  
-    C_1\\  
-            &...\\  
-            &      &C_K\\  
+    1\\\\  
+    -A_1    &...\\\\  
+            &A_{K-1}    &1\\\\  
+    C_1\\\\  
+            &...\\\\  
+            &      &C_K 
 \end{matrix}
-\right],
+,
 
 X=\left[
 \begin{matrix}
-    x_1\\  
-    x_2\\  
-    ...\\  
+    x_1\\\\  
+    x_2\\\\  
+    ...\\\\  
     x_K  
 \end{matrix}
 \right],
 
 W=\left[
 \begin{matrix}
-    Q_1\\  
-        &...\\
-        &   &Q_K\\
-        &   &   &R_1\\
-        &   &   &   &...\\
-        &   &   &   &   &R_K\\
+    Q_1\\\\  
+        &...\\\\
+        &   &Q_K\\\\
+        &   &   &R_1\\\\
+        &   &   &   &...\\\\
+        &   &   &   &   &R_K
 \end{matrix}
 \right]$$
 
