@@ -51,7 +51,6 @@ $$
   
 把数据写成向量或矩阵形式，令：  
 $$
-
 Z=\left[
 \begin{matrix}
     v_1\\\\    
@@ -63,9 +62,7 @@ Z=\left[
     ...\\\\      
     y_K
 \end{matrix}
-\right],
-
-H=
+\right],H=\left[
 \begin{matrix}
     1\\\\  
     -A_1    &...\\\\  
@@ -74,18 +71,14 @@ H=
             &...\\\\  
             &      &C_K 
 \end{matrix}
-,
-
-X=\left[
+\right],X=\left[
 \begin{matrix}
     x_1\\\\  
     x_2\\\\  
     ...\\\\  
     x_K  
 \end{matrix}
-\right],
-
-W=\left[
+\right],W=\left[
 \begin{matrix}
     Q_1\\\\  
         &...\\\\
