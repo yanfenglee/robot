@@ -50,7 +50,7 @@ $$
 $$
 Z=\left[
 \begin{matrix}
-    v_1\\\\    
+    v_1\\
     v_2\\\\    
     ...\\\\      
     v_K\\\\      
@@ -61,7 +61,7 @@ Z=\left[
 \end{matrix}
 \right],H=\left[
 \begin{matrix}
-    1\\\\  
+    1\\\\ 
     -A_1    &...\\\\  
             &A_{K-1}    &1\\\\  
     C_1\\\\  
