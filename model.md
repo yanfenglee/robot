@@ -1,6 +1,3 @@
-<script type="text/javascript" async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 ## 线性高斯模型(Linear-Gaussian model, LG)
 
 运动模型：$x_k = A_{k-1}x_{k-1} + v_k + w_k$  
@@ -16,7 +13,7 @@
 转换矩阵: $A_k \in \mathbb{R}^{N*N}$    
 观测矩阵: $C_k \in \mathbb{R}^{M*N}$
    
-状态估计问题定义为：根据系统初始值，输入量，观测量，按上面的模型寻找X的最佳的估计值  
+状态估计问题定义为：根据系统初始值，输入量，观测量，按上面的模型寻找X的最佳的估计值  
   
 ## 求解方法
 * 贝叶斯推断(Bayesian inference)
