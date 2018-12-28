@@ -10,9 +10,9 @@
 输入: $v_k \in \mathbb{R}^N$  
 处理噪声: $w_k \in \mathbb{R}^N \sim (0, Q_k)$  
 观测噪声: $n_k \in \mathbb{R}^N \sim (0, R_k)$  
-转换矩阵: $A_k \in \mathbb{R}^{N*N}$  
-观测矩阵: $C_k \in \mathbb{R}^{M*N}$  
-
+转换矩阵: $A_k \in \mathbb{R}^{N*N}$    
+观测矩阵: $C_k \in \mathbb{R}^{M*N}$
+   
 状态估计问题定义为：根据系统初始值，输入量，观测量，按上面的模型寻找X的最佳的估计值  
   
 ## 求解方法
@@ -22,32 +22,24 @@
 对于LG问题，上面两种方法是一样的，完全贝叶斯后验就是高斯后验，X在均值处取得最大概率  
 
 ### MAP
-$$
-\begin{aligned}  
-\hat{x} &= argmax_xp(x|v,y) \\  
-        &= argmax_x\frac{p(y|v,x)*p(x|v)}{p(y|v)} \\  
-        &= argmax_xp(y|x)*p(x|v)  
-\end{aligned}  
-$$
+$$\hat{x} = argmax_xp(x|v,y)$$  
+$$= argmax_x\frac{p(y|v,x)*p(x|v)}{p(y|v)}$$  
+$$= argmax_xp(y|x)*p(x|v)$$  
+
 其中输入v包括系统的初始状态和输入序列,y为观测值序列, 可以丢掉分母，因为p(y|v)不依赖x，p(y|v,x)丢掉v因为y不依赖v  
   
 由于w,n噪声的不相关性, 可对p(y|x)，p(x|v) 进行分解：  
-$$
-p(y|x)=\prod_{k=1}^Kp(y_k|x_k) \\  
-p(x|v)=\prod_{k=1}^Kp(x_k|x_{k-1},v_k)  
-$$
+$$p(y|x)=\prod_{k=1}^Kp(y_k|x_k)$$
+$$p(x|v)=\prod_{k=1}^Kp(x_k|x_{k-1},v_k)$$
 
 根据高斯分布有：  
-$$\begin{aligned}  
-p(y_k|x_k)&=\frac{1}{\sqrt{(2\pi)^NdetR_k}}exp(-\frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k)) \\  
-p(x_k|x_{k-1},v_k)&=\frac{1}{\sqrt{(2\pi)^NdetQ_k}}exp(-\frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k))
-\end{aligned}$$
+$$p(y_k|x_k) = \frac{1}{\sqrt{(2\pi)^NdetR_k}}exp(-\frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k))$$ 
+
+$$p(x_k|x_{k-1},v_k) = \frac{1}{\sqrt{(2\pi)^NdetQ_k}}exp(-\frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k))$$
   
 方便起见对p(y|x)，p(x|v)取对数，并去掉不依赖x的量, 去掉负号：  
-$$\begin{aligned}
-J_{v,k}(x)&=\frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k) \\  
-J_{y,k}(x)&=\frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k)
-\end{aligned}$$
+$$J_{v,k}(x) = \frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k)$$  
+$$J_{y,k}(x) = \frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k)$$
   
 目标函数可以重新定义为：  
 $$
@@ -57,7 +49,7 @@ $$
 把数据写成向量或矩阵形式，令：  
 $$
 Z=\left[
-    \begin{array}{ccc}
+\begin{matrix}
     v_1\\  
     v_2\\  
     ...\\  
@@ -66,35 +58,41 @@ Z=\left[
     y_2\\  
     ...\\  
     y_K
-\end{array}
+\end{matrix}
 \right],
 
-H=\left[\begin{array}{ccc}
-1\\  
--A_1    &...\\  
-        &A_{K-1}    &1\\  
-        \\  
-C_1\\  
-        &...\\  
-        &      &C_K\\  
-\end{array}\right],
+H=\left[
+\begin{matrix}
+    1\\  
+    -A_1    &...\\  
+            &A_{K-1}    &1\\  
+            \\  
+    C_1\\  
+            &...\\  
+            &      &C_K\\  
+\end{matrix}
+\right],
 
 
-X=\left[\begin{array}{ccc}
+X=\left[
+\begin{matrix}
     x_1\\  
     x_2\\  
     ...\\  
     x_K  
-\end{array}\right],
+\end{matrix}
+\right],
 
-W=\left[\begin{array}{ccc}
+W=\left[
+\begin{matrix}
     Q_1\\  
         &...\\
         &   &Q_K\\
         &   &   &R_1\\
         &   &   &   &...\\
         &   &   &   &   &R_K\\
-\end{array}\right]
+\end{matrix}
+\right]
   
 $$
 
