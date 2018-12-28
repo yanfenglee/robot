@@ -27,17 +27,17 @@ $$= argmax_x\frac{p(y|v,x)*p(x|v)}{p(y|v)}$$
 $$= argmax_xp(y|x)*p(x|v)$$  
 
 其中输入v包括系统的初始状态和输入序列,y为观测值序列, 可以丢掉分母，因为p(y|v)不依赖x，p(y|v,x)丢掉v因为y不依赖v  
-  
-由于w,n噪声的不相关性, 可对p(y|x)，p(x|v) 进行分解：  
+
+由于w,n噪声的不相关性, 可对p(y|x),p(x|v) 进行分解：  
 $$p(y|x)=\prod_{k=1}^Kp(y_k|x_k)$$
 $$p(x|v)=\prod_{k=1}^Kp(x_k|x_{k-1},v_k)$$
 
-根据高斯分布有：  
+根据高斯分布有：  
 $$p(y_k|x_k) = \frac{1}{\sqrt{(2\pi)^NdetR_k}}exp(-\frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k))$$ 
 
 $$p(x_k|x_{k-1},v_k) = \frac{1}{\sqrt{(2\pi)^NdetQ_k}}exp(-\frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k))$$
   
-方便起见对p(y|x)，p(x|v)取对数，并去掉不依赖x的量, 去掉负号：  
+方便起见对p(y|x)，p(x|v)取对数,并去掉不依赖x的量, 去掉负号：  
 $$J_{v,k}(x) = \frac{1}{2}(x_k-A_{k-1}x_{k-1}-v_k)^TQ_k^{-1}(x_k-A_{k-1}x_{k-1}-v_k)$$  
 $$J_{y,k}(x) = \frac{1}{2}(y_k-C_kx_k)^TR_k^{-1}(y_k-C_kx_k)$$
   
@@ -93,3 +93,9 @@ $$
 $$
 \hat{X}=argmin_XJ(X)  
 $$
+
+由于$J(X)$是个抛物面，可以找到其最小值的封闭解：
+$$
+\left . \frac{\partial J(X)}{\partial X^T} \right|_{\hat{X}}=-H^TW^{-1}(Z-H\hat{X})=0
+$$
+同时$\hat{X}$也是问题的最小二乘解
